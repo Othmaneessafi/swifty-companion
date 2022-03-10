@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, Pressable, TextInput} from 'react-native';
+import { StyleSheet, Text, ImageBackground, View, Button, Pressable, TextInput} from 'react-native';
 import axios from 'axios';
 
 export default function Index({ navigation }) {
@@ -29,7 +29,6 @@ export default function Index({ navigation }) {
     
       try {
         const token = await getToken();
-        console.log(login)
         const response = await axios.get(`https://api.intra.42.fr/v2/users/${login}`,
           {
             headers: {
@@ -53,9 +52,9 @@ export default function Index({ navigation }) {
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          backgroundColor: '#fff',
-          alignItems: 'center',
-          justifyContent: 'center',
+          // backgroundColor: '#fff',
+          // alignItems: 'center',
+          // justifyContent: 'center',
         },
         button: {
           backgroundColor: 'transparent',
@@ -63,7 +62,7 @@ export default function Index({ navigation }) {
           textAlign: 'center',
           borderRadius: 10,
           padding: 10,
-          border: '1px solid black'
+          border: '1px solid whitesmoke',
         },
         input: {
           height: 40,
@@ -71,24 +70,48 @@ export default function Index({ navigation }) {
           borderWidth: 1,
           padding: 10,
           borderRadius: 5,
+          borderColor: "whitesmoke",
+          color: "whitesmoke",
+        },
+        image : {
+          flex: 1,
+          justifyContent: "center",
+          alignItems: 'center',
+        },
+        logo : {
+          color: "whitesmoke",
+          fontSize: 40,
+          fontFamily: "Freehand-Regular"
+        },
+        title : {
+          color: "whitesmoke",
+          fontSize: 18,
+          fontFamily: "Roboto"
+        },
+        text : {
+          color: "whitesmoke",
         },
       });
 
-  return (
-    <>
-    <View style={styles.container}>
-      <Text>Home page</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeLogin}
-        value={login}
-        placeholder="Enter login"
-        keyboardType="numeric"
-      />
-      <Pressable style={styles.button} title="Search" onPress={() => getUser(login)}><Text>Search</Text></Pressable>
-    </View>
-    </>
-  )
+      const image = { uri: "https://42.fr/wp-content/uploads/2021/06/Rectangle-3-1024x774.png" };
+      return (
+        <>
+        <View style={styles.container}>
+        <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+          <Text style={styles.logo} >Swifty-companion</Text>
+          <Text style={styles.title} >Search for login</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeLogin}
+            value={login}
+            placeholder="Enter login"
+            keyboardType="numeric"
+          />
+          <Pressable style={styles.button} title="Search" onPress={() => getUser(login)}><Text style={styles.text}>Search</Text></Pressable>
+          </ImageBackground>
+        </View>
+        </>
+      )
 }
 
 

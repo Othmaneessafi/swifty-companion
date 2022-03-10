@@ -1,24 +1,30 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, FlatList, Text, ScrollView, View, SafeAreaView, Image } from 'react-native';
+
+
+const Item = ({ title, mark }) => (
+  <View style={styles.item}>
+    <Text style={styles.text} >{title}<Text style={styles.mark}>{mark ? `(${mark})` : ''}</Text></Text>
+  </View>
+);
 
 export default function Projects({ route }) {
-//   const { userData } = route.params;
+  const { userData } = route.params;
 
-//   console.log(userData);
+  const renderItem = ({ item }) => (
+    <Item title={item.project.name} mark={item.final_mark} />
+  );
   return (
-    <View style={styles.container}>
-      {/* <Image
-        style={styles.userimage}
-        source={{
-          uri: userData.image_url,
-        }}
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+      <FlatList
+        data={userData.projects_users}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
       />
-      <Text>{userData.usual_full_name}</Text>
-      <Text>{userData.login}</Text>
-      <Text>{userData.location}</Text>
-      <Text>{userData.email}</Text> */}
       <Text>projects</Text>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -27,12 +33,6 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       // justifyContent: 'center',
-      padding: 10,
-    },
-    userimage: {
-      borderRadius: "100%",
-      width: 100,
-      height: 100
     },
     Button: {
       flex: 1,
@@ -40,5 +40,23 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       width: '80vw'
+    },
+    scrollView: {
+      width: '100%',
+      padding: 10,
+    },
+    item: {
+      borderRadius: 10,
+      backgroundColor: 'whitesmoke',
+      padding: 20,
+      margin: 10,
+      // boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1)',
+
+    },
+    text: {
+      fontWeight: 'bold',
+    },
+    mark: {
+      color: 'gray',
     },
   });

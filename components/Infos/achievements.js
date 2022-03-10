@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     userimage: {
-      borderRadius: "100%",
+      borderRadius: 100,
       width: 100,
       height: 100
     },

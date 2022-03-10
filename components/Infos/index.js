@@ -10,8 +10,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
 
-export default function index({ route }) {
+export default function Index({ route }) {
+  const { userData } = route.params;
 
+  console.log(userData);
   return (
     <Tab.Navigator
       initialRouteName="Profile"
@@ -48,9 +50,9 @@ export default function index({ route }) {
     }
     >
       <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false}} />
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false}} />
-      <Tab.Screen name="Projects" component={ProjectsScreen} options={{ headerShown: false}} />
-      <Tab.Screen name="Achievements" component={AchievementsScreen} options={{ headerShown: false}} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false}}  initialParams={{userData: userData}} />
+      <Tab.Screen name="Projects" component={ProjectsScreen} options={{ headerShown: false}} initialParams={{userData: userData}} />
+      <Tab.Screen name="Achievements" component={AchievementsScreen} options={{ headerShown: false}} initialParams={{userData: userData}} />
     </Tab.Navigator>
   )
 }
@@ -61,11 +63,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       // justifyContent: 'center',
       padding: 10,
-    },
-    userimage: {
-      borderRadius: "100%",
-      width: 100,
-      height: 100
     },
     Button: {
       flex: 1,
