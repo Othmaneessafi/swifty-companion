@@ -18,7 +18,7 @@ export default function Index({ route }) {
     <Tab.Navigator
       initialRouteName="Profile"
       screenOptions={({ route }) => ({
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
         tabBarStyle: {
             position: 'absolute',
             bottom: 25,
@@ -49,7 +49,6 @@ export default function Index({ route }) {
       })
     }
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false}} />
       <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false}}  initialParams={{userData: userData}} />
       <Tab.Screen name="Projects" component={ProjectsScreen} options={{ headerShown: false}} initialParams={{userData: userData}} />
       <Tab.Screen name="Achievements" component={AchievementsScreen} options={{ headerShown: false}} initialParams={{userData: userData}} />

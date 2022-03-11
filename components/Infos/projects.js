@@ -2,9 +2,11 @@ import React from 'react'
 import { StyleSheet, FlatList, Text, ScrollView, View, SafeAreaView, Image } from 'react-native';
 
 
-const Item = ({ title, mark }) => (
+const Item = ({ title, mark, status }) => (
   <View style={styles.item}>
-    <Text style={styles.text} >{title}<Text style={styles.mark}>{mark ? `(${mark})` : ''}</Text></Text>
+    <Text style={styles.text} >{title}</Text>
+    <Text style={styles.mark} >{status}</Text>
+    <Text style={styles.status}>{mark ? mark : ''}</Text>
   </View>
 );
 
@@ -12,18 +14,18 @@ export default function Projects({ route }) {
   const { userData } = route.params;
 
   const renderItem = ({ item }) => (
-    <Item title={item.project.name} mark={item.final_mark} />
+    <Item title={item.project.name} mark={item.final_mark} status={item.status} />
   );
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+    <Text style={styles.title}>Projects</Text>
+      {/* <ScrollView style={styles.scrollView}> */}
       <FlatList
         data={userData.projects_users}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
-      <Text>projects</Text>
-      </ScrollView>
+      {/* </ScrollView> */}
     </SafeAreaView>
   )
 }
@@ -50,13 +52,29 @@ const styles = StyleSheet.create({
       backgroundColor: 'whitesmoke',
       padding: 20,
       margin: 10,
-      // boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1)',
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+
+      elevation: 3,
 
     },
     text: {
       fontWeight: 'bold',
+      fontSize: 18,
     },
     mark: {
+      color: 'grey',
+    },
+    status: {
       color: 'gray',
+    },
+    title: {
+      fontSize: 25,
+      margin: 10,
     },
   });
