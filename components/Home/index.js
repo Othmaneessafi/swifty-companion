@@ -11,8 +11,8 @@ export default function Index({ navigation }) {
         const response = await axios.post(`https://api.intra.42.fr/oauth/token`,
           {
             grant_type: "client_credentials",
-            client_id: "185fe61bbde778abe84872211f868a11b5cba96e6b460c69c48c7bca64f85dff",
-            client_secret: "67818d94253e168245c7be72599af92a97f4e7dc22543e2104f67fa661857146",
+            client_id: "** your client id **",
+            client_secret: "** your client secret **",
           }
         )
         if (response.data) {
